@@ -1,0 +1,430 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TryBasket - Only the fresh</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap' rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+
+</head>
+
+<body>
+
+  <!-- Humberger Begin -->
+  <div class="humberger__menu__overlay"></div>
+  <div class="humberger__menu__wrapper">
+      <div class="humberger__menu__logo">
+          <a href="#"><img src="{% static 'img/logo.png' %}" alt=""></a>
+      </div>
+      <div class="humberger__menu__cart">
+        <ul>
+            {% comment %} <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li> {% endcomment %}
+            <li><a href=""><i class="fa fa-shopping-bag"></i> <span id="count">{{cart_count}}</span></a></li>
+        </ul>
+        <div class="header__cart__price">Total: <span id='ct'>₹{{cart_total}}</span></div>
+      </div>
+      <div class="humberger__menu__widget">
+          <div class="header__top__right__language col-sm mb-2">
+              <img src="{% static 'img/language.png' %}" alt="">
+              <div>English</div>
+              <span class="arrow_carrot-down"></span>
+              <ul>
+                  <li><a href="#">Hindi</a></li>
+                  <li><a href="#">English</a></li>
+              </ul>
+          </div>
+                        {% if user.is_authenticated %}
+
+                            <div class="header__top__right__auth col">
+                                <a href="" class="btn btn-light"><i class="fa fa-user-circle" aria-hidden="true"></i><strong>{{user.first_name}}</strong></a>
+                            </div>
+                            <span class="ml-2 mr-2">|</span>
+                            <div class="header__top__right__auth">
+                            <a href="{% url 'userLogout' %}" class="btn btn-light"><i class="fa fa-sign-out"></i></i>Logout</a>
+                            </div>
+                                
+
+
+                        {% else %}
+
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'userLogin' %}" class="btn btn-light"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <span class="ml-2 mr-2">|</span>
+                            <div class="header__top__right__auth">
+                            <a href="{% url 'register' %}" class="btn btn-light"><i class="fa fa-user-plus"></i>Register</a>
+                            </div>
+
+                        {% endif %}
+      </div>
+      <nav class="humberger__menu__nav mobile-menu">
+          <ul>
+              <li class="active"><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'shop' %}">Shop</a></li>
+              <li><a href="">Basket</a></li>
+              <li><a href="">Contact</a></li>
+          </ul>
+      </nav>
+      <div id="mobile-menu-wrap"></div>
+      <div class="header__top__right__social">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+          <a href="#"><i class="fa fa-pinterest-p"></i></a>
+      </div>
+      <div class="humberger__menu__contact">
+          <ul>
+              <li><i class="fa fa-envelope"></i> hello@trybasket.com</li>
+              <li>Free Shipping for all Order above ₹299</li>
+          </ul>
+      </div>
+  </div>
+  <!-- Humberger End -->
+
+  <!-- Header Section Begin -->
+  <header class="header">
+      <div class="header__top">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                      <div class="header__top__left">
+                        <ul>
+                            <li><i class="fa fa-envelope"></i> hello@trybasket.com</li>
+                            <li>Free Shipping for all Order above ₹299</li>
+                        </ul>
+                      </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                      <div class="header__top__right">
+                          <div class="header__top__right__social">
+                              <a href="#"><i class="fa fa-facebook"></i></a>
+                              <a href="#"><i class="fa fa-twitter"></i></a>
+                              <a href="#"><i class="fa fa-linkedin"></i></a>
+                              <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                          </div>
+                          
+                        {% if user.is_authenticated %}
+
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'userDashboard' %}" class="btn btn-light><i class="fa fa-user-circle" aria-hidden="true"></i><strong>{{user.first_name}}</strong></a>
+                            </div>
+                            <span class="ml-2 mr-2">|</span>
+                            <div class="header__top__right__auth">
+                            <a href="{% url 'userLogout' %}" class="btn btn-light><i class="fa fa-sign-out"></i></i>Logout</a>
+                            </div>
+
+                        {% else %}
+
+                            <div class="header__top__right__auth">
+                                <a href="{% url 'userLogin' %}" class="btn btn-light {% if '/login/' in request.path %}d-none{% endif %}" ><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <span class="ml-2 mr-2 {% if '/login/' in request.path %}d-none{% endif %}">|</span>
+                            <div class="header__top__right__auth">
+                            <a href="{% url 'register' %}" class="btn btn-light {% if '/register/' in request.path %}d-none{% endif %}"><i class="fa fa-user-plus"></i>Register</a>
+                            </div>
+
+                        {% endif %}
+
+                        </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-3">
+                  <div class="header__logo" style="max-width: 25rem;">
+                      <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                  </div>
+              </div>
+              <div class="col-lg-6">
+                  <nav class="header__menu">
+                      <ul>
+                          <li class="{% if '/' == request.path %}active{% endif %}"><a href="{% url 'home' %}">Home</a></li>
+                          <li class="{% if '/shop' in request.path %}active{% endif %}"><a href="{% url 'shop' %}">Shop</a></li>
+                          <li class="{% if '/cart/' in request.path %}active{% endif %}"><a href="">Basket</a></li>
+                          <li class="{% if '/contact/' in request.path %}active{% endif %}"><a href="">Contact</a></li>
+                      </ul>
+                  </nav>
+              </div>
+              <div class="col-lg-3">
+                  <div class="header__cart">
+                      <ul>
+                          <li><a href="#"><i class="fa fa-heart"></i> <span>0</span></a></li> 
+                          <li><a href=""><i class="fa fa-shopping-bag"></i> <span id="count">{{cart_count}}</span></a></li>
+                      </ul>
+                      <div class="header__cart__price">Total: <span id='ct'>₹{{cart_total}}</span></div>
+                  </div>
+              </div>
+          </div>
+          <div class="humberger__open">
+              <i class="fa fa-bars"></i>
+          </div>
+      </div>
+  </header>
+  <!-- Header Section End -->
+  
+<section class="section-content padding-y">
+
+  <!-- ============================ COMPONENT REGISTER   ================================= -->
+    <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+        <article class="card-body">
+      <header class="mb-4"><h2 class="card-title text-center">Create a new Account</h2></header>
+
+      {% include 'includes/alerts.html' %}
+
+      <form action="{% url 'register' %}" method="post">
+
+        {% csrf_token %}
+      
+        <div class="form-row">
+					<div class="col form-group">
+						<label>First name</label>
+            {
+              {{form.first_name}}
+              <h5 id="usercheck1" style="color: red;">
+                **First name is missing
+            </h5>
+					</div> <!-- form-group end.// -->
+					<div class="col form-group">
+						<label>Last name</label>
+              {{form.last_name}}
+              <h5 id="usercheck2" style="color: red;">
+                **Last name is missing
+            </h5>
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row end.// -->
+				<div class="form-group">
+					<label>Email</label>
+					  {{form.email}}
+            <small id="emailvalid" class="form-text
+                text-muted invalid-feedback">
+                        Your email must be a valid email
+                    </small>
+        </div>
+        <div class="form-group">
+					<label>Phone Number</label>
+          <div class="d-flex">
+            <span class="border mr-1 btn">+91</span>
+					  {{form.phone_number}}
+            <small id="phonevalid" class="form-text
+                text-muted invalid-feedback">
+                        Please enter a valid mobile number
+                    </small>
+          </div>
+        </div>
+        <div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Create password</label>
+              {{form.password}}
+              <h5 id="passcheck" style="color: red;">
+                **Please Fill the password
+            </h5>
+					</div> <!-- form-group end.// --> 
+					<div class="form-group col-md-6">
+						<label>Confirm password</label>
+					    {{form.confirm_password}}
+              <h5 id="conpasscheck" style="color: red;">
+                **Password didn't match
+            </h5>
+					</div> <!-- form-group end.// -->  
+				</div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success text-white btn-block" id='submitbtn'> Register  </button>
+        </div> <!-- form-group// -->      
+        {{form.email.errors}}
+        {{form.phone_number.errors}}
+        {{form.non_field_errors}}
+        
+        </form>
+      </article><!-- card-body.// -->
+      </div> <!-- card .// -->
+      <p class="text-center mt-4">Have an account? <a href="{% url 'userLogin' %}">Log In</a></p>
+      <br><br>
+  <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+  
+  
+  </section>
+  
+  {% include 'includes/footer.html' %}
+
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // Document is ready
+$(document).ready(function () {
+  // Validate Username
+  $("#usercheck1").hide();
+  let firstnameError = true;
+  $("#id_first_name").keyup(function () {
+    validateFirstName();
+  });
+  
+  function validateFirstName() {
+    let usernameValue = $("#id_first_name").val();
+    if (usernameValue.length == "") {
+    $("#usercheck1").show();
+    firstnameError = false;
+    return false;
+    } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+    $("#usercheck1").show();
+    $("#usercheck1").html("**length of first name must be between 3 and 10");
+    firstnameError = false;
+    return false;
+    } else {
+    $("#usercheck1").hide();
+    }
+  }
+
+  $("#usercheck2").hide();
+  let usernameError = true;
+  $("#id_last_name").keyup(function () {
+    validateLastName();
+  });
+
+  function validateLastName() {
+    let usernameValue = $("#id_last_name").val();
+    if (usernameValue.length == "") {
+    $("#usercheck2").show();
+    usernameError = false;
+    return false;
+    } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+    $("#usercheck2").show();
+    $("#usercheck2").html("**length of last name must be between 3 and 10");
+    usernameError = false;
+    return false;
+    } else {
+    $("#usercheck2").hide();
+    }
+  }
+  
+  // Validate Email
+  const email = document.getElementById("id_email");
+  email.addEventListener("blur", () => {
+    let regex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+    let s = email.value;
+    if (regex.test(s)) {
+    email.classList.remove("is-invalid");
+    emailError = true;
+    } else {
+    email.classList.add("is-invalid");
+    emailError = false;
+    }
+  });
+
+  // Validate Phone Number
+  const phone = document.getElementById("id_phone_number");
+  phone.addEventListener("blur", () => {
+    let regex = /^[0-9]{10}$/;
+    let s = phone.value;
+    if (regex.test(s)) {
+    phone.classList.remove("is-invalid");
+    phoneError = true;
+    } else {
+    phone.classList.add("is-invalid");
+    phoneError = false;
+    }
+  });
+  
+  // Validate Password
+  $("#passcheck").hide();
+  let passwordError = true;
+  $("#id_password").keyup(function () {
+    validatePassword();
+  });
+  function validatePassword() {
+    let passwordValue = $("#id_password").val();
+    if (passwordValue.length == "") {
+    $("#passcheck").show();
+    passwordError = false;
+    return false;
+    }
+    if (passwordValue.length < 6 || passwordValue.length > 16) {
+    $("#passcheck").show();
+    $("#passcheck").html(
+      "**length of your password must be between 6 and 16"
+    );
+    $("#passcheck").css("color", "red");
+    passwordError = false;
+    return false;
+    } else {
+    $("#passcheck").hide();
+    }
+  }
+  
+  // Validate Confirm Password
+  $("#conpasscheck").hide();
+  let confirmPasswordError = true;
+  $("#id_confirm_password").keyup(function () {
+    validateConfirmPassword();
+  });
+  function validateConfirmPassword() {
+    let confirmPasswordValue = $("#id_confirm_password").val();
+    let passwordValue = $("#id_password").val();
+    if (passwordValue != confirmPasswordValue) {
+    $("#conpasscheck").show();
+    $("#conpasscheck").html("**Password didn't Match");
+    $("#conpasscheck").css("color", "red");
+    confirmPasswordError = false;
+    return false;
+    } else {
+    $("#conpasscheck").hide();
+    }
+  }
+  
+  // Submit button
+  $("#submitbtn").click(function () {
+    validateFirstName();
+    validateLastName();
+    validatePassword();
+    validateConfirmPassword();
+    validateEmail();
+    if (
+    firstnameError = true &&
+    usernameError == true &&
+    passwordError == true &&
+    confirmPasswordError == true &&
+    emailError == true &&
+    phoneError == true
+    ) {
+    return true;
+    } else {
+    return false;
+    }
+  });
+  });
+  
+  </script>
+
+  <!-- Js Plugins -->
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+  <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+  <script src="{% static 'js/mixitup.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
+  
